@@ -1,0 +1,9 @@
+c:\users\kawakami\documents\visual studio 2017\Projects\ev3Logger\ev3Logger\bin\Debug\ev3Logger.exe.config
+c:\users\kawakami\documents\visual studio 2017\Projects\ev3Logger\ev3Logger\bin\Debug\ev3Logger.exe
+c:\users\kawakami\documents\visual studio 2017\Projects\ev3Logger\ev3Logger\bin\Debug\ev3Logger.pdb
+c:\users\kawakami\documents\visual studio 2017\Projects\ev3Logger\ev3Logger\obj\Debug\ev3Logger.csprojResolveAssemblyReference.cache
+c:\users\kawakami\documents\visual studio 2017\Projects\ev3Logger\ev3Logger\obj\Debug\ev3Logger.Properties.Resources.resources
+c:\users\kawakami\documents\visual studio 2017\Projects\ev3Logger\ev3Logger\obj\Debug\ev3Logger.csproj.GenerateResource.Cache
+c:\users\kawakami\documents\visual studio 2017\Projects\ev3Logger\ev3Logger\obj\Debug\ev3Logger.exe
+c:\users\kawakami\documents\visual studio 2017\Projects\ev3Logger\ev3Logger\obj\Debug\ev3Logger.pdb
+C:\Users\kawakami\documents\visual studio 2017\Projects\ev3Logger\ev3Logger\obj\Debug\ev3Logger.Ev3Lover.resources

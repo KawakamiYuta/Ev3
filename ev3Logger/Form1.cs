@@ -18,6 +18,11 @@ namespace ev3Logger
         public Ev3Lover()
         {
             InitializeComponent();
+            recvDataForm = new RecvDataForm();
+            recvDataForm.Init(this);
+            recvDataForm.Show();
+            //Form3 a = new Form3();
+            //a.Show();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -71,9 +76,9 @@ namespace ev3Logger
                 SerialPort.Handshake = Handshake.None;
 
                 //! 文字コードをセットする.
-                SerialPort.Encoding = Encoding.ASCII;
+                SerialPort.Encoding = Encoding.UTF8;
 
-                SerialPort.NewLine = "\n";
+                SerialPort.NewLine = "\r";
 
                 try
                 {
@@ -94,33 +99,50 @@ namespace ev3Logger
             }
         }
 
+        delegate void AppendRcvDataTextBoxDelegate(string text);
+
+        public void AppendRcvDataTextBox(string text)
+        {
+            if (this.recvDataForm.RecvDataBox.InvokeRequired)
+            {
+                this.recvDataForm.RecvDataBox.Invoke(new AppendRcvDataTextBoxDelegate(AppendRcvDataTextBox),text);
+            }
+            else
+            {
+                recvDataForm.RecvDataBox.Text += text;
+            }
+        }
+
         private void LogFileWriterThread_DoWork(object sender, DoWorkEventArgs e)
         {
-            string path = Environment.CurrentDirectory + @"\" + System.DateTime.Now.Year.ToString()+
-                System.DateTime.Now.Month.ToString() + System.DateTime.Now.Day.ToString() + 
-                System.DateTime.Now.Hour.ToString() + System.DateTime.Now.Minute.ToString() +
+            string path = Environment.CurrentDirectory + @"\" + System.DateTime.Now.Year.ToString()+"-"+
+                System.DateTime.Now.Month.ToString() + "-"+System.DateTime.Now.Day.ToString() +"-"+ 
+                System.DateTime.Now.Hour.ToString() + "-"+System.DateTime.Now.Minute.ToString() +"-"+
                 System.DateTime.Now.Second.ToString() + ".csv";
 
             using (StreamWriter sw = File.CreateText(path))
             {
-                sw.AutoFlush = true;
                 sw.NewLine = "\n";
+                sw.AutoFlush = true;
                 while (_cont)
                 {
                     try
                     {
                         char c = (char)SerialPort.ReadChar();
-                        if(c == '\r')
+                        string msg = "";
+                        if (c == '\r')
                         {
-                            SerialPort.WriteLine(c.ToString());
+                            msg = "\r\n";
                         }
                         else
                         {
-                            SerialPort.Write(c.ToString());
+                            msg = c.ToString();
                         }
-                        sw.WriteLine(c.ToString());
+
+                        sw.Write(msg);
+                        this.AppendRcvDataTextBox(msg);
                     }
-                    catch (Exception) { break; }
+                    catch (Exception ex) { MessageBox.Show(ex.Message); }
                 }
             }
         }
@@ -167,14 +189,20 @@ namespace ev3Logger
                 StreamReader sr = new StreamReader(File.OpenRead(FileNameLabel.Text));
                 while (!sr.EndOfStream)
                 {
-                    string line = sr.ReadLine() + '\r';
-                    SerialPort.WriteLine(line);
+                    string line = sr.ReadLine() + "\n\r";
+                    SerialPort.Write(line);
+                    SerialPort.Write("\r");
                 }
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        public void SerialWrite(string text)
+        {
+            SerialPort.Write(text);
         }
     }
 }

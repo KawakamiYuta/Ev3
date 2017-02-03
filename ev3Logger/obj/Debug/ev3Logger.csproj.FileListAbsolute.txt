@@ -8,3 +8,4 @@ C:\Users\kawakami\Documents\Visual Studio 2017\Projects\ev3Logger\ev3Logger\obj\
 C:\Users\kawakami\Documents\Visual Studio 2017\Projects\ev3Logger\ev3Logger\obj\Debug\ev3Logger.csproj.GenerateResource.Cache
 C:\Users\kawakami\Documents\Visual Studio 2017\Projects\ev3Logger\ev3Logger\obj\Debug\ev3Logger.exe
 C:\Users\kawakami\Documents\Visual Studio 2017\Projects\ev3Logger\ev3Logger\obj\Debug\ev3Logger.pdb
+C:\Users\kawakami\documents\visual studio 2017\Projects\ev3Logger\ev3Logger\obj\Debug\ev3Logger.csprojResolveAssemblyReference.cache

@@ -130,19 +130,19 @@ namespace ev3Logger
                     {
                         char c = (char)SerialPort.ReadChar();
                         string msg = "";
-                        if (c == '\r')
-                        {
-                            msg = "\r\n";
-                        }
-                        else
-                        {
+                        //if (c == '\r')
+                        //{
+                        //    msg = "\r\n";
+                        //}
+                       // else
+                       // {
                             msg = c.ToString();
-                        }
+                       // }
 
                         sw.Write(msg);
                         this.AppendRcvDataTextBox(msg);
                     }
-                    catch (Exception ex) { MessageBox.Show(ex.Message); }
+                    catch (Exception ex) { sw.Close(); MessageBox.Show(ex.Message); }
                 }
             }
         }
